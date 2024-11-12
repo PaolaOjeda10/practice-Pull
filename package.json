@@ -1,0 +1,25 @@
+{
+  "name": "practiceone",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@vueuse/core": "^11.2.0",
+    "autoprefixer": "^10.4.20",
+    "pinia": "^2.2.6",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.14",
+    "vue": "^3.5.12",
+    "vue-i18n": "^9.14.1",
+    "vue-router": "^4.4.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.1.4",
+    "vite": "^5.4.10"
+  }
+}
