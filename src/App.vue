@@ -2,78 +2,77 @@
 import { ref, computed } from 'vue'
 
 const items = ref([
-  { id: 1, nombre: 'Manzana', precio: 3 },
-  { id: 2, nombre: 'Banana', precio: 1 },
-  { id: 3, nombre: 'Cereza', precio: 5 },
-  { id: 4, nombre: 'Durazno', precio: 2 },
+  { id: 1, name: 'Apple', price: 3 },
+  { id: 2, name: 'Banana', price: 1 },
+  { id: 3, name: 'Cherry', price: 5 },
+  { id: 4, name: 'Peach', price: 2 },
 ])
 
-const items2 = ref([
-  { id: 1, nombre: 'Juan', edad: 21, calificacion: 85 },
-  { id: 2, nombre: 'Ana', edad: 19, calificacion: 92 },
-  { id: 3, nombre: 'Luis', edad: 22, calificacion: 76 },
-  { id: 4, nombre: 'Marta', edad: 20, calificacion: 88 },
+const students = ref([
+  { id: 1, name: 'John', age: 21, grade: 85 },
+  { id: 2, name: 'Anna', age: 19, grade: 92 },
+  { id: 3, name: 'Louis', age: 22, grade: 76 },
+  { id: 4, name: 'Martha', age: 20, grade: 88 },
 ])
 
-// Variables reactivas para los inputs
-const nuevoNombre = ref('')
-const nuevaEdad = ref(null)
-const nuevaCalificacion = ref(null)
+const newName = ref('')
+const newAge = ref(null)
+const newGrade = ref(null)
 
-const itemEncontrado = items.value.find(item => item.precio > 3)
-const itemsFiltrados = items.value.filter(item => item.precio < 4)
-const indexEncontrado = items.value.findIndex(item => item.nombre === 'Cereza')
-const nombres = items.value.map(item => item.nombre)
-const tieneProductoBarato = items.value.some(item => item.precio < 2)
-const todosSonCaros = items.value.every(item => item.precio > 2)
-const totalPrecio = computed(() => {
-  return items.value.reduce((total, item) => total + item.precio, 0)
+const foundItem = items.value.find(item => item.price > 3)
+const filteredItems = items.value.filter(item => item.price < 4)
+const foundIndex = items.value.findIndex(item => item.name === 'Cherry')
+const names = items.value.map(item => item.name)
+const hasCheapProduct = items.value.some(item => item.price < 2)
+const allAreExpensive = items.value.every(item => item.price > 2)
+const totalPrice = computed(() => {
+  return items.value.reduce((total, item) => total + item.price, 0)
 })
-const estudianteEncontrado = computed(() => {
-  return items2.value.find(item => item.calificacion > 90)
+const foundStudent = computed(() => {
+  return students.value.find(item => item.grade > 90)
 })
-const estudiantesFiltrados = computed(() => {
-  return items2.value.filter(item => item.edad < 22)
+const filteredStudents = computed(() => {
+  return students.value.filter(item => item.age < 22)
 })
-const indexEstudiante = computed(() => {
-  return items2.value.findIndex(item => item.nombre === 'Luis')
+const studentIndex = computed(() => {
+  return students.value.findIndex(item => item.name === 'Louis')
 })
-const nombresEstudiantes = computed(() => {
-  return items2.value.map(item => item.nombre)
+const studentNames = computed(() => {
+  return students.value.map(item => item.name)
 })
-const tieneEstudianteConAltaCalificacion = computed(() => {
-  return items2.value.some(item => item.calificacion > 90)
+const hasHighGradeStudent = computed(() => {
+  return students.value.some(item => item.grade > 90)
 })
-const todosEstudiantesAprobados = computed(() => {
-  return items2.value.every(item => item.calificacion >= 60)
+const allStudentsPassed = computed(() => {
+  return students.value.every(item => item.grade >= 60)
 })
-const promedioCalificaciones = computed(() => {
-  return items2.value.reduce((total, item) => total + item.calificacion, 0) / items2.value.length
+const averageGrade = computed(() => {
+  return students.value.reduce((total, item) => total + item.grade, 0) / students.value.length
 })
 
-const agregarEstudiante = () => {
-  if (!nuevoNombre.value || !nuevaEdad.value || !nuevaCalificacion.value) {
-    alert('Por favor, complete todos los campos.')
+const addStudent = () => {
+  if (!newName.value || !newAge.value || !newGrade.value) {
+    alert('Please fill in all fields.')
     return
   }
 
-  items2.value.push({
-    id: items2.value.length + 1,
-    nombre: nuevoNombre.value,
-    edad: nuevaEdad.value,
-    calificacion: nuevaCalificacion.value,
+  students.value.push({
+    id: students.value.length + 1,
+    name: newName.value,
+    age: newAge.value,
+    grade: newGrade.value,
   })
 
-  nuevoNombre.value = ''
-  nuevaEdad.value = null
-  nuevaCalificacion.value = null
+  newName.value = ''
+  newAge.value = null
+  newGrade.value = null
 }
 </script>
 
 <template>
   <div class="flex flex-col lg:flex-row gap-6 p-4">
     <div class="flex-1 bg-white text-black p-6 rounded-lg shadow-md">
-      <h3 class="text-xl font-semibold mb-4">Ejemplo Uno</h3>
+      <h3 class="text-xl font-semibold mb-4">Example One</h3>
       <div class="mt-4 bg-white text-black p-4 rounded-lg shadow-md max-h-60 overflow-auto">
         <pre class="bg-gray-100 p-4 rounded-lg text-sm whitespace-pre-wrap">
           {{ items }}
@@ -83,94 +82,94 @@ const agregarEstudiante = () => {
       <div class="space-y-4 text-left">
         <div>
           <strong>Find:</strong>
-          {{ itemEncontrado?.nombre }}
+          {{ foundItem?.name }}
         </div>
         <div>
-          <strong>Filter (precio < 4):</strong>
-          {{ itemsFiltrados.map(item => item.nombre).join(', ') }}
+          <strong>Filter (price < 4):</strong>
+          {{ filteredItems.map(item => item.name).join(', ') }}
         </div>
         <div>
-          <strong>findIndex Cereza:</strong>
-          {{ indexEncontrado }}
+          <strong>findIndex Cherry:</strong>
+          {{ foundIndex }}
         </div>
         <div>
           <strong>Map:</strong>
-          {{ nombres.join(', ') }}
+          {{ names.join(', ') }}
         </div>
         <div>
-          <strong>Some: ¿Hay algún producto barato? (precio < 2):</strong>
-          {{ tieneProductoBarato }}
+          <strong>Some: Is there a cheap product? (price < 2):</strong>
+          {{ hasCheapProduct }}
         </div>
         <div>
-          <strong>Every: ¿Todos los productos son caros? (precio > 2):</strong>
-          {{ todosSonCaros }}
+          <strong>Every: Are all products expensive? (price > 2):</strong>
+          {{ allAreExpensive }}
         </div>
         <div>
-          <strong>Reduce: Total Precio:</strong>
-          {{ totalPrecio }}Bs
+          <strong>Reduce: Total Price:</strong>
+          {{ totalPrice }}$
         </div>
       </div>
     </div>
     <div class="flex-1 bg-gray-600 p-6 rounded-lg shadow-md">
-      <h3 class="text-xl font-semibold mb-4 text-white">Ejemplo dos</h3>
+      <h3 class="text-xl font-semibold mb-4 text-white">Example Two</h3>
        <div class="mt-4 bg-white text-black p-4 rounded-lg shadow-md">
-        <h4 class="font-semibold mb-2">Agregar Estudiante:</h4>
+        <h4 class="font-semibold mb-2">Add Student:</h4>
         <div class="space-y-4">
           <input 
-            v-model="nuevoNombre" 
+            v-model="newName" 
             type="text" 
-            placeholder="Nombre" 
+            placeholder="Name" 
             class="w-full p-2 border rounded bg-gray-100"
           />
           <input 
-            v-model="nuevaEdad" 
+            v-model="newAge" 
             type="number" 
-            placeholder="Edad" 
+            placeholder="Age" 
             class="w-full p-2 border rounded bg-gray-100"
           />
           <input 
-            v-model="nuevaCalificacion" 
+            v-model="newGrade" 
             type="number" 
-            placeholder="Calificación" 
+            placeholder="Grade" 
             class="w-full p-2 border rounded bg-gray-100"
           />
         </div>
-        <button @click="agregarEstudiante" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">Agregar Estudiante</button>
+        <button @click="addStudent" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">Add Student</button>
       </div>
         <div class="mt-4 bg-white text-black p-4 rounded-lg shadow-md max-h-60 overflow-auto">
-          <h4 class="font-semibold mb-2">Lista de Estudiantes:</h4>
+          <h4 class="font-semibold mb-2">Student List:</h4>
             <pre class="bg-gray-100 p-4 rounded-lg text-sm whitespace-pre-wrap">
-              {{ items2 }}
+              {{ students }}
             </pre>
         </div>
       <div class="space-y-4 text-left text-white">
         <div>
-          <strong>Estudiante con calificación mayor a 90:</strong>
-          {{ estudianteEncontrado?.nombre }}
+          <strong>Student with grade > 90:</strong>
+          {{ foundStudent?.name }}
         </div>
         <div>
-          <strong>Estudiantes menores de 22 años:</strong> 
-          {{ estudiantesFiltrados?.map(item => item.nombre).join(', ') }}
+          <strong>Students under 22:</strong> 
+          {{ filteredStudents?.map(item => item.name).join(', ') }}
         </div>
         <div>
-          <strong>Índice de Luis:</strong>
-          {{ indexEstudiante }}
+          <strong>Index of Louis:</strong>
+          {{ studentIndex }}
         </div>
         <div>
-          <strong>Nombres de estudiantes:</strong>
-          {{ nombresEstudiantes?.join(', ') }}
+          <strong>Student names:</strong>
+          {{ studentNames?.join(', ') }}
         </div>
         <div>
-          <strong>¿Hay algún estudiante con calificación mayor a 90?</strong>
-          {{ tieneEstudianteConAltaCalificacion }}
+          <strong>Is there a student with grade > 90?</strong>
+          {{ hasHighGradeStudent }}
         </div>
         <div>
-          <strong>¿Todos los estudiantes están aprobados (calificación >= 60)?</strong>
-          {{ todosEstudiantesAprobados }}
+          <strong>Did all students pass? (grade >= 60):</strong>
+          {{ allStudentsPassed }}
         </div>
         <div>
-          <strong>Promedio de calificaciones:</strong>
-          {{ promedioCalificaciones }}%
+          <strong>Average grade:</strong>
+          {{ averageGrade }}%
         </div>
       </div>
     </div>
