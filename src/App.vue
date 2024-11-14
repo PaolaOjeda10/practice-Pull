@@ -1,6 +1,7 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import Student from './components/Student.vue';
+import Person from './components/Person.vue';
 
 const nameOne = ref('Juan Carlos')
 
@@ -54,19 +55,62 @@ const months = ref([
     money: 7900,
   }
 ])
+const persons = ref([
+{
+  name:'Luana',
+  age:3,
+  pets:[
+    {
+      type: 'dog',
+      name: 'mega'
+    }
+  ]
+},
+{
+  name:'Rosario',
+  age:32,
+  pets:[]
+},
+{
+  name:'Ander',
+  age:10,
+  pets:[
+    {
+      type: 'cat',
+      name: 'tako'
+    },
+    {
+      type: 'parrot',
+      name: 'Lorenza'
+    }
+  ]
+},
+{
+  name:'Jimena',
+  age:34,
+  pets:[
+    {
+      type: 'cat',
+      name: 'guarani'
+    }
+  ]
+}
+])
 
 </script>
 
-
 <template>
   <!-- Student component -->
-  <Student v-bind:name="nameOne"
+  <Student
+    v-if="false"
+    v-bind:name="nameOne"
     apellidoPaterno="Condori"
     apellidoMaterno="Machicado"
     :moneyMonth="months" />
 
-
-  <!-- Student component -->
-  <!-- <Student /> -->
+  <!-- Person component -->
+   <Person
+    :persons="persons"
+  />
 
 </template>
