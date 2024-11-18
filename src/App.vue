@@ -1,37 +1,25 @@
 <script setup>
-import { ref, computed } from 'vue';
-import Person from './components/Person.vue';
+import { ref, computed, watch } from 'vue';
+const text =ref('')
+const rever = computed(()=>{
+  // return text.value.split('').reverse().join('')
+  return text.value.split(' ').map(item=>item.split('').reverse().join('')).join(' ')
+})
+const vowels = ref(['a','e','i','o','u'])
 
-const newPerson = ref([])
-const name = ref('')
-const age = ref(0)
-const save = computed(()=>{
-  newPerson.value.push({name:name.value, age:age.value})
+const resultado = computed(()=>{
+  let count=0
+  for (let index = 0; index < text.value.length; index++) {
+    if (vowels.value.includes(text.value[index])) {
+      count++;
+    }
+  }
+  return count; 
 })
 </script>
 
 <template>
+<input v-model="text" type="text" class="text-black"> <br>
 
-    <!-- Form register -->
-    <div>
-
-      <label class="block">Name:</label>
-
-      <input v-model="name" type="text" placeholder="name" class="block text-black">  <br>
-
-      <label >Age:</label>
-
-      <input v-model="age" type="number" class="block text-black">  <br>
-
-      <button @click="save" class="rounded-lg bg-white text-black">guardar</button>
-
-    </div>
-
-  <!-- Person component -->
-   
-   <Person
-    v-for="(person, index) in newPerson"
-    :key="index"
-    :person="person"/>
-
+{{ resultado }}
 </template>
