@@ -45,8 +45,8 @@ const totalSalary = computed(()=>{
             />
         </tbody>
 
-        <p class="text-black">
+        <span class="text-black">
             TOTAL: {{ totalSalary }}
-        </p>
+        </span>
     </table>
 </template>
