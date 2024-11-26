@@ -44,9 +44,8 @@ const totalSalary = computed(()=>{
                 :indexEmployed="indexEmployed"
             />
         </tbody>
-
-        <span class="text-black">
-            TOTAL: {{ totalSalary }}
-        </span>
     </table>
+    <div class="text-black">
+            TOTAL: {{ totalSalary }}
+        </div>
 </template>
